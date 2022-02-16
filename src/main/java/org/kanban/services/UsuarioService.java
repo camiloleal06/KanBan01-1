@@ -15,10 +15,9 @@ public interface UsuarioService {
 
 	public Usuario save(Usuario usuario);
 
-
 	public Optional<Usuario> findById(Integer id);
 
 	public boolean existsById(Integer id);
 
-	public void delete(Integer id);
+	public void delete(int id);
 }

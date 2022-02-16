@@ -31,7 +31,6 @@ private UsuarioRepository usuarioRepository;
 
 	@Override
 	public Usuario save(Usuario usuario) {
-	
 		usuario.setPassword(new BCryptPasswordEncoder()
 			          .encode(usuario.getPassword()));
             	 return usuarioRepository.save(usuario);
@@ -39,18 +38,19 @@ private UsuarioRepository usuarioRepository;
 
 	@Override
 	public Optional<Usuario> findById(Integer id) {
+
 		return usuarioRepository.findById(id);
 	}
 
-	@Override
-	public void delete(Integer id) {
-		// TODO Auto-generated method stub
-		
+	public void delete(int id) {
+		if(this.usuarioRepository.existsById(id))
+		  usuarioRepository.deleteById(id);
 	}
 
 	@Override
 	public boolean existsById(Integer id) {
-	return usuarioRepository.existsById(id);
+	 return usuarioRepository.existsById(id);
 	}
+
 
 }

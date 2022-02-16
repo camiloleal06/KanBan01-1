@@ -1,5 +1,8 @@
 package org.kanban.dto;
 
-public class ObtenerUsuarioDTO {
+import java.util.Set;
 
+public class ObtenerUsuarioDTO {
+    private String username;
+    private Set<String> roles;
 }

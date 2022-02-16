@@ -38,12 +38,10 @@ public class SeguridadConf extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/build/", "/dist/**", "/plugins/**", "/docs/**").permitAll()
 		.and()
 		.csrf().disable().httpBasic()
-		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and()
-		.formLogin();
+		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 	}
 
 }

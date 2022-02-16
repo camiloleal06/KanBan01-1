@@ -1,9 +1,14 @@
 package org.kanban.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.kanban.dto.TareaUsuarioDTO;
 import org.kanban.entities.Tarea;
+import org.kanban.entities.Usuario;
+import org.kanban.repository.TareaRepository;
 import org.kanban.services.TareaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,10 +16,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class TareaServiceImpl implements TareaService{
 
+	@Autowired
+	TareaRepository tareaRepository;
+
+	@Override
+	public Optional<Tarea> findByTitulo(String titulo) {
+		return tareaRepository.findByTitulo(titulo);
+	}
+
 	@Override
 	public List<Tarea> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return tareaRepository.findAll();
 	}
 
 	@Override
@@ -24,15 +36,13 @@ public class TareaServiceImpl implements TareaService{
 	}
 
 	@Override
-	public void save(Tarea tarea) {
-		// TODO Auto-generated method stub
-		
+	public Tarea save(Tarea tarea) {
+	return tareaRepository.save(tarea);
 	}
 
 	@Override
-	public Tarea findOne(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Tarea> findById(Integer id) {
+	return tareaRepository.findById(id);
 	}
 
 	@Override
@@ -41,10 +51,16 @@ public class TareaServiceImpl implements TareaService{
 		
 	}
 
-	@Override
-	public boolean existsById(Integer id) {
+	public List<Tarea> tareasUsuarioAutenticado(Usuario usuario) {
 		// TODO Auto-generated method stub
-		return false;
+		return tareaRepository.findByUsuario(usuario);
+	}
+	public List<TareaUsuarioDTO> listTareasDTO(int id){
+		return tareaRepository.listaTareasByUsuario(id);
 	}
 
+	@Override
+	public boolean existsById(Integer id) {
+		return false;
+	}
 }
